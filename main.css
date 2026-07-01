@@ -41,7 +41,7 @@ body {
 .card-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-    gap: 40px; /* Verhoogd van 20px naar 40px zodat ze verder uit elkaar staan */
+    gap: 60px; /* Verhoogd van 20px naar 40px zodat ze verder uit elkaar staan */
     width: 100%;
     padding: 10px;
 }
