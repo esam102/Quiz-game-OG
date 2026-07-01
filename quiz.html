@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Choose Your Quiz</title>
+    <link rel="stylesheet" href="main.css">
+</head>
+<body>
+
+    <div id="selector-screen" class="home-wrapper">
+        <h1 class="main-title">Home page</h1>
+        
+        <div class="card-grid">
+            <div class="quiz-card bg-1">
+                <div class="card-content">
+                    <h2>Keuze 1</h2>
+                    <p class="card-desc">Test je kennis over Monkey D. Luffy en zijn legendarische Straw Hat crew in de wereld van One Piece!</p>
+                    <span class="card-counter">aantal 0/10</span>
+                    <button class="card-btn" onclick="startQuiz('one-piece')">knop</button>
+                </div>
+            </div>
+
+            <div class="quiz-card bg-2">
+                <div class="card-content">
+                    <h2>Keuze 2</h2>
+                    <p class="card-desc">Van Dragon Ball tot Naruto en Attack on Titan. Ben jij een echte all-round anime expert?</p>
+                    <span class="card-counter">aantal 0/10</span>
+                    <button class="card-btn" onclick="startQuiz('anime-general')">knop</button>
+                </div>
+            </div>
+
+            <div class="quiz-card bg-3">
+                <div class="card-content">
+                    <h2>Keuze 3</h2>
+                    <p class="card-desc">Laat zien wat je weet over iconische games zoals Minecraft, Mario, Elden Ring en PlayStation klassiekers.</p>
+                    <span class="card-counter">aantal 0/10</span>
+                    <button class="card-btn" onclick="startQuiz('gaming')">knop</button>
+                </div>
+            </div>
+
+            <div class="quiz-card bg-4">
+                <div class="card-content">
+                    <h2>Keuze 4</h2>
+                    <p class="card-desc">Herken jij alle blockbusters en hitseries? Test je popcultuur kennis in deze ultieme filmquiz.</p>
+                    <span class="card-counter">aantal 0/10</span>
+                    <button class="card-btn" onclick="startQuiz('movies')">knop</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="quiz-screen" class="quiz-container hidden">
+        <div class="quiz-header">
+            <span id="progress-text">Question 1 of 10</span>
+            <span id="score-text">Score: 0</span>
+        </div>
+        <h2 id="question-text">Question text?</h2>
+        <div id="options-container" class="options-grid"></div>
+    </div>
+
+    <div id="results-screen" class="quiz-container hidden">
+        <h1>Quiz Complete!</h1>
+        <p id="final-score-text">You scored 0 out of 10</p>
+        <button onclick="resetGame()" class="restart-btn">Play Again</button>
+    </div>
+
+    <script src="quiz.js"></script>
+</body>
+</html>

@@ -1,0 +1,112 @@
+// Database holding 10 distinct questions per quiz category
+const quizDatabase = {
+    'one-piece': [
+        { q: "Who is the captain of the Straw Hat Pirates?", a: ["Zoro", "Luffy", "Sanji", "Nami"], correct: 1 },
+        { q: "What is Luffy's ultimate dream?", a: ["Find All Blue", "Become Pirate King", "Defeat Akainu", "Collect Gold"], correct: 1 },
+        { q: "Which Devil Fruit did Luffy eat?", a: ["Flame-Flame Fruit", "Chop-Chop Fruit", "Gum-Gum Fruit", "Dark-Dark Fruit"], correct: 2 },
+        { q: "Who was the first crew member to officially join Luffy?", a: ["Nami", "Usopp", "Zoro", "Chopper"], correct: 2 },
+        { q: "What is the name of the Straw Hat's second, current main ship?", a: ["Going Merry", "Thousand Sunny", "Red Force", "Oro Jackson"], correct: 1 },
+        { q: "Which crew member is a skeleton and a musician?", a: ["Franky", "Jinbe", "Brook", "Usopp"], correct: 2 },
+        { q: "What is Sanji's exact profession on the crew?", a: ["Cook", "Doctor", "Navigator", "Sniper"], correct: 0 },
+        { q: "Who handed down the iconic Straw Hat to Luffy?", a: ["Garp", "Shanks", "Ace", "Rayleigh"], correct: 1 },
+        { q: "Which sea did Luffy set sail from originally?", a: ["Grand Line", "West Blue", "North Blue", "East Blue"], correct: 3 },
+        { q: "Which powerful marine is Luffy's biological grandfather?", a: ["Sengoku", "Koby", "Garp", "Akainu"], correct: 2 }
+    ],
+    'anime-general': [
+        { q: "In Dragon Ball Z, what planet is Goku originally from?", a: ["Earth", "Namek", "Vegeta", "Sadala"], correct: 2 },
+        { q: "Who is the main protagonist of Naruto?", a: ["Sasuke", "Kakashi", "Naruto", "Gaara"], correct: 2 },
+        { q: "What item grants control over life and death in Death Note?", a: ["A Scythe", "A Notebook", "A Ring", "An Amulet"], correct: 1 },
+        { q: "In Attack on Titan, what secret entities are inside the walls?", a: ["Monsters", "Titans", "Cannons", "Gold"], correct: 1 },
+        { q: "What system of magic/science is featured in Fullmetal Alchemist?", a: ["Chakra", "Alchemy", "Nen", "Mana"], correct: 1 },
+        { q: "Who holds the title of 'Symbol of Peace' in My Hero Academia?", a: ["Endeavor", "Deku", "All Might", "Bakugo"], correct: 2 },
+        { q: "What sport is central to the anime Haikyuu!!?", a: ["Basketball", "Soccer", "Tennis", "Volleyball"], correct: 3 },
+        { q: "What is Saitama's official hero name in One Punch Man?", a: ["Caped Baldy", "Silver Fang", "Genos", "Blast"], correct: 0 },
+        { q: "In Demon Slayer, what is Tanjiro's younger sister's name?", a: ["Shinobu", "Nezuko", "Kanae", "Tamayo"], correct: 1 },
+        { q: "What game utilizes card battles in Yu-Gi-Oh?", a: ["Magic", "Hearthstone", "Duel Monsters", "Poker"], correct: 2 }
+    ],
+    'gaming': [
+        { q: "Who serves as Nintendo's primary mascot?", a: ["Sonic", "Link", "Mario", "Kirby"], correct: 2 },
+        { q: "Which sandbox game features the 'Ender Dragon'?", a: ["Terraria", "Minecraft", "Roblox", "Fortnite"], correct: 1 },
+        { q: "What is the highest-selling video game console of all time?", a: ["PS4", "Nintendo DS", "PlayStation 2", "Xbox 360"], correct: 2 },
+        { q: "What is the protagonist hero's name in The Legend of Zelda?", a: ["Zelda", "Link", "Ganon", "Epona"], correct: 1 },
+        { q: "Which Battle Royale game features the location 'Tilted Towers'?", a: ["Apex Legends", "PUBG", "Fortnite", "Warzone"], correct: 2 },
+        { q: "In classic Pac-Man, how many ghosts chase you?", a: ["2", "3", "4", "5"], correct: 2 },
+        { q: "What tech giant company manufactures the Xbox?", a: ["Sony", "Nintendo", "Microsoft", "Sega"], correct: 2 },
+        { q: "What underwater dystopian city serves as the setting for BioShock?", a: ["Rapture", "Columbia", "Gotham", "Tamriel"], correct: 0 },
+        { q: "Which sci-fi military shooter stars the Master Chief?", a: ["Doom", "Halo", "Gears of War", "Destiny"], correct: 1 },
+        { q: "What year did the original PlayStation console launch in Japan?", a: ["1990", "1994", "1998", "2000"], correct: 1 }
+    ]
+};
+
+// Game State Tracking
+let activeQuestions = [];
+let currentQuestionIndex = 0;
+let userScore = 0;
+
+// Starts a selected quiz
+function startQuiz(quizKey) {
+    activeQuestions = quizDatabase[quizKey];
+    currentQuestionIndex = 0;
+    userScore = 0;
+
+    // Switch Screens
+    document.getElementById('selector-screen').classList.add('hidden');
+    document.getElementById('quiz-screen').classList.remove('hidden');
+
+    loadQuestion();
+}
+
+// Renders the current question and option buttons
+function loadQuestion() {
+    const currentQuestion = activeQuestions[currentQuestionIndex];
+    
+    // Update Header Status
+    document.getElementById('progress-text').innerText = `Question ${currentQuestionIndex + 1} of 10`;
+    document.getElementById('score-text').innerText = `Score: ${userScore}`;
+    
+    // Set Question Title
+    document.getElementById('question-text').innerText = currentQuestion.q;
+    
+    // Clear old buttons and generate new ones
+    const container = document.getElementById('options-container');
+    container.innerHTML = "";
+    
+    currentQuestion.a.forEach((optionText, index) => {
+        const button = document.createElement('button');
+        button.innerText = optionText;
+        button.classList.add('option-btn');
+        button.onclick = () => checkAnswer(index);
+        container.appendChild(button);
+    });
+}
+
+// Processes answer validation
+function checkAnswer(selectedIndex) {
+    const currentQuestion = activeQuestions[currentQuestionIndex];
+    
+    if (selectedIndex === currentQuestion.correct) {
+        userScore++;
+    }
+    
+    currentQuestionIndex++;
+    
+    // Check if there are more questions left
+    if (currentQuestionIndex < activeQuestions.length) {
+        loadQuestion();
+    } else {
+        showResults();
+    }
+}
+
+// Switches to final score screen
+function showResults() {
+    document.getElementById('quiz-screen').classList.add('hidden');
+    document.getElementById('results-screen').classList.remove('hidden');
+    document.getElementById('final-score-text').innerText = `You scored ${userScore} out of 10!`;
+}
+
+// Resets back to home dashboard
+function resetGame() {
+    document.getElementById('results-screen').classList.add('hidden');
+    document.getElementById('selector-screen').classList.remove('hidden');
+}

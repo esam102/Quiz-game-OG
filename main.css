@@ -1,0 +1,207 @@
+/* --- Basis Reset & Global Styles --- */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Segoe UI', system-ui, sans-serif;
+    color: #000000;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 60px 20px;
+    
+    /* Mooie lichte achtergrond met een subtiel ruitjespatroon (net als je blueprint/schets) */
+    background-color: #fcfcfc;
+    background-image: 
+        linear-gradient(to right, rgba(0, 0, 0, 0.03) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(0, 0, 0, 0.03) 1px, transparent 1px);
+    background-size: 20px 20px;
+}
+
+/* --- Layout voor het Keuzescherm --- */
+.home-wrapper {
+    width: 100%;
+    max-width: 1200px; /* Iets breder gemaakt voor de extra tussenruimte */
+    text-align: center;
+}
+
+.main-title {
+    font-size: 2.8rem;
+    font-weight: 500;
+    margin-bottom: 50px;
+    color: #000;
+    letter-spacing: 1px;
+}
+
+/* Grid die de 4 kaarten verdeelt */
+.card-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 40px; /* Verhoogd van 20px naar 40px zodat ze verder uit elkaar staan */
+    width: 100%;
+    padding: 10px;
+}
+
+/* --- De Kaarten (Geïnspireerd op jouw screenshot) --- */
+.quiz-card {
+    background-color: #ffffff;
+    border: 2px solid #000000;
+    border-radius: 40px; /* Grote afgeronde hoeken uit je blueprint */
+    height: 520px;
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.06); /* Iets zachtere, mooiere schaduw */
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+/* Subtiel effect als je met de muis over een kaart beweegt */
+.quiz-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.12);
+}
+
+/* Overlay om de tekst super leesbaar te houden over de foto heen */
+.card-content {
+    background: rgba(255, 255, 255, 0.88); /* Wit semi-transparant laagje */
+    width: 100%;
+    height: 100%;
+    padding: 40px 25px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.quiz-card h2 {
+    font-size: 1.8rem;
+    font-weight: 700;
+    margin-bottom: 25px;
+    color: #000;
+}
+
+.card-desc {
+    font-size: 0.95rem;
+    line-height: 1.6;
+    color: #333;
+    text-align: center;
+    flex-grow: 1; /* Duwt de teller en knop strak naar beneden */
+}
+
+.card-counter {
+    font-size: 0.95rem;
+    color: #000;
+    margin-bottom: 25px;
+    font-weight: 500;
+}
+
+/* De knop onderaan de kaart */
+.card-btn {
+    background: #ffffff;
+    color: #000000;
+    border: 2px solid #000000; /* Iets dikkere rand voor betere look */
+    border-radius: 14px;
+    padding: 12px 45px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    width: auto;
+    transition: all 0.2s ease;
+}
+
+.card-btn:hover {
+    background-color: #000000;
+    color: #ffffff;
+}
+
+/* --- Foto Achtergronden per Kaart --- */
+.bg-1 {
+    background-image: url('https://images.unsplash.com/photo-1607604276583-eef5d076aa5f?w=500');
+    background-size: cover;
+    background-position: center;
+}
+.bg-2 {
+    background-image: url('https://images.unsplash.com/photo-1578632767115-351597cf2477?w=500');
+    background-size: cover;
+    background-position: center;
+}
+.bg-3 {
+    background-image: url('https://images.unsplash.com/photo-1538481199705-c710c4e965fc?w=500');
+    background-size: cover;
+    background-position: center;
+}
+.bg-4 {
+    background-image: url('https://images.unsplash.com/photo-1536440136628-849c177e76a1?w=500');
+    background-size: cover;
+    background-position: center;
+}
+
+/* --- Gameplay Schermen Stijlen (Wanneer de quiz start) --- */
+.quiz-container {
+    background: #ffffff;
+    padding: 40px 30px;
+    border-radius: 24px;
+    border: 2px solid #000;
+    width: 100%;
+    max-width: 520px;
+    text-align: center;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+}
+
+.hidden {
+    display: none !important;
+}
+
+.quiz-header {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.95rem;
+    color: #666;
+    margin-bottom: 20px;
+    border-bottom: 1px solid #eee;
+    padding-bottom: 12px;
+}
+
+.options-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    margin-top: 20px;
+}
+
+.option-btn {
+    background-color: #ffffff;
+    color: #222;
+    border: 2px solid #e0e0e0;
+    border-radius: 12px;
+    padding: 14px 20px;
+    text-align: left;
+    font-size: 1rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.option-btn:hover {
+    border-color: #000000;
+    background-color: #f9f9f9;
+}
+
+.restart-btn {
+    background: #000;
+    color: #fff;
+    border: none;
+    padding: 14px 30px;
+    border-radius: 12px;
+    cursor: pointer;
+    font-weight: 600;
+    margin-top: 25px;
+    transition: background 0.2s;
+}
+.restart-btn:hover {
+    background: #333;
+}
