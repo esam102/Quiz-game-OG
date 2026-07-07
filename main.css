@@ -1,4 +1,6 @@
-/* --- Basis Reset & Global Styles --- */
+/* ==========================================================================
+   1. BASIS & LUFFY ACHTERGROND (Gecorrigeerd)
+   ========================================================================== */
 * {
     box-sizing: border-box;
     margin: 0;
@@ -6,179 +8,231 @@
 }
 
 body {
-    font-family: 'Segoe UI', system-ui, sans-serif;
-    color: #000000;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    color: #111827; /* Donkergrijs/zwart voor optimale leesbaarheid */
     min-height: 100vh;
     display: flex;
     justify-content: center;
     align-items: center;
-    padding: 60px 20px;
-    
-    /* Mooie lichte achtergrond met een subtiel ruitjespatroon (net als je blueprint/schets) */
-    background-color: #fcfcfc;
-    background-image: 
-        linear-gradient(to right, rgba(0, 0, 0, 0.03) 1px, transparent 1px),
-        linear-gradient(to bottom, rgba(0, 0, 0, 0.03) 1px, transparent 1px);
-    background-size: 20px 20px;
+    padding: 40px 20px;
+    line-height: 1.5;
+
+    /* --- DE NIEUWE GRIJZE BASISKLEUR --- */
+    background-color: #d1d5db; /* Een mooie, rustige zilvergrijze kleur */
+    position: relative; /* Nodig om het Luffy patroon er netjes overheen te leggen */
 }
 
-/* --- Layout voor het Keuzescherm --- */
+/* --- HET LUFFY STROHOED PATROON (Werkt gegarandeerd) --- */
+body::before {
+    content: "";
+    position: fixed; /* Zorgt ervoor dat het patroon vast blijft staan als je scrollt */
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    
+    /* We gebruiken een gecodeerde vectorafbeelding van een strohoed (Straw Hat) */
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='0.9em' font-size='70'%3E👒%3C/text%3E%3C/svg%3E");
+    
+    background-size: 80px 80px; /* Bepaalt hoe groot de hoedjes zijn */
+    background-repeat: repeat; /* Herhaalt het logo over het hele scherm */
+    
+    opacity: 0.08; /* Subtiel watermerk effect (verhoog naar 0.20 als je ze nóg duidelijker wilt) */
+    z-index: -1; /* Zorgt dat het patroon achter je quiz-kaarten zit */
+    pointer-events: none; /* Zorgt dat het patroon niet in de weg zit bij het klikken */
+}
+
+/* ==========================================================================
+   2. STARTPAGINA (INDEX)
+   ========================================================================== */
+.welcome-container {
+    background: #ffffff;
+    border: 1px solid #e5e7eb;
+    padding: 48px 40px;
+    border-radius: 16px;
+    width: 100%;
+    max-width: 480px;
+    text-align: center;
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.05), 0 4px 6px -2px rgba(0, 0, 0, 0.025);
+}
+
+.welcome-container h1 {
+    font-size: 2.25rem;
+    font-weight: 700;
+    color: #111827;
+    margin-bottom: 16px;
+    letter-spacing: -0.02em;
+}
+
+.welcome-text {
+    color: #4b5563;
+    font-size: 1rem;
+    margin-bottom: 32px;
+}
+
+.start-game-btn {
+    display: block;
+    text-decoration: none;
+    background-color: #0f172a; /* Strak donkerblauw/zwart */
+    color: #ffffff;
+    font-size: 1.05rem;
+    font-weight: 600;
+    padding: 14px 24px;
+    border-radius: 8px;
+    width: 100%;
+    transition: background-color 0.2s ease;
+}
+
+.start-game-btn:hover {
+    background-color: #334155;
+}
+
+/* ==========================================================================
+   3. QUIZ SELECTIESCHERM (De Kaarten)
+   ========================================================================== */
 .home-wrapper {
     width: 100%;
-    max-width: 1200px; /* Iets breder gemaakt voor de extra tussenruimte */
+    max-width: 1100px;
     text-align: center;
 }
 
 .main-title {
-    font-size: 2.8rem;
-    font-weight: 500;
-    margin-bottom: 50px;
-    color: #000;
-    letter-spacing: 1px;
+    font-size: 2.5rem;
+    font-weight: 700;
+    margin-bottom: 40px;
+    color: #111827;
+    letter-spacing: -0.02em;
 }
 
-/* Grid die de 4 kaarten verdeelt */
 .card-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-    gap: 60px; /* Verhoogd van 20px naar 40px zodat ze verder uit elkaar staan */
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 24px;
     width: 100%;
-    padding: 10px;
 }
 
-/* --- De Kaarten (Geïnspireerd op jouw screenshot) --- */
 .quiz-card {
     background-color: #ffffff;
-    border: 2px solid #000000;
-    border-radius: 40px; /* Grote afgeronde hoeken uit je blueprint */
-    height: 520px;
+    border: 1px solid #e5e7eb;
+    border-radius: 12px;
+    height: 400px; 
     position: relative;
     overflow: hidden;
     display: flex;
     flex-direction: column;
-    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.06); /* Iets zachtere, mooiere schaduw */
-    transition: transform 0.25s ease, box-shadow 0.25s ease;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
-/* Subtiel effect als je met de muis over een kaart beweegt */
 .quiz-card:hover {
-    transform: translateY(-8px);
-    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.12);
+    transform: translateY(-4px);
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
 }
 
-/* Overlay om de tekst super leesbaar te houden over de foto heen */
 .card-content {
-    background: rgba(255, 255, 255, 0.88); /* Wit semi-transparant laagje */
+    /* Donkere fade aan de onderkant zodat witte tekst leesbaar is */
+    background: linear-gradient(to top, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0.4) 50%, rgba(0,0,0,0.1) 100%);
     width: 100%;
     height: 100%;
-    padding: 40px 25px;
+    padding: 24px;
     display: flex;
     flex-direction: column;
-    align-items: center;
+    justify-content: flex-end; 
+    align-items: flex-start;
+    text-align: left;
 }
 
 .quiz-card h2 {
-    font-size: 1.8rem;
+    font-size: 1.5rem;
     font-weight: 700;
-    margin-bottom: 25px;
-    color: #000;
+    color: #ffffff;
+    margin-bottom: 8px;
 }
 
 .card-desc {
-    font-size: 0.95rem;
-    line-height: 1.6;
-    color: #333;
-    text-align: center;
-    flex-grow: 1; /* Duwt de teller en knop strak naar beneden */
+    font-size: 0.9rem;
+    color: #e5e7eb;
+    margin-bottom: 16px;
+    line-height: 1.4;
 }
 
 .card-counter {
-    font-size: 0.95rem;
-    color: #000;
-    margin-bottom: 25px;
-    font-weight: 500;
+    font-size: 0.85rem;
+    color: #9ca3af;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin-bottom: 16px;
 }
 
-/* De knop onderaan de kaart */
 .card-btn {
-    background: #ffffff;
-    color: #000000;
-    border: 2px solid #000000; /* Iets dikkere rand voor betere look */
-    border-radius: 14px;
-    padding: 12px 45px;
-    font-size: 1rem;
+    background-color: #ffffff;
+    color: #111827;
+    border: none;
+    border-radius: 6px;
+    padding: 10px 20px;
+    font-size: 0.95rem;
     font-weight: 600;
     cursor: pointer;
-    width: auto;
-    transition: all 0.2s ease;
+    width: 100%;
+    transition: background-color 0.2s;
 }
 
 .card-btn:hover {
-    background-color: #000000;
-    color: #ffffff;
+    background-color: #f3f4f6;
 }
 
-/* --- Foto Achtergronden per Kaart --- */
-.bg-1 {
-    background-image: url('https://images.unsplash.com/photo-1607604276583-eef5d076aa5f?w=500');
-    background-size: cover;
-    background-position: center;
-}
-.bg-2 {
-    background-image: url('https://images.unsplash.com/photo-1578632767115-351597cf2477?w=500');
-    background-size: cover;
-    background-position: center;
-}
-.bg-3 {
-    background-image: url('https://images.unsplash.com/photo-1538481199705-c710c4e965fc?w=500');
-    background-size: cover;
-    background-position: center;
-}
-.bg-4 {
-    background-image: url('https://images.unsplash.com/photo-1536440136628-849c177e76a1?w=500');
-    background-size: cover;
-    background-position: center;
-}
+/* Achtergrondafbeeldingen */
+.bg-1 { background-image: url('https://images.unsplash.com/photo-1607604276583-eef5d076aa5f?w=500'); background-size: cover; background-position: center; }
+.bg-2 { background-image: url('https://images.unsplash.com/photo-1578632767115-351597cf2477?w=500'); background-size: cover; background-position: center; }
+.bg-3 { background-image: url('https://images.unsplash.com/photo-1538481199705-c710c4e965fc?w=500'); background-size: cover; background-position: center; }
+.bg-4 { background-image: url('https://images.unsplash.com/photo-1536440136628-849c177e76a1?w=500'); background-size: cover; background-position: center; }
 
-/* --- Gameplay Schermen Stijlen (Wanneer de quiz start) --- */
+/* ==========================================================================
+   4. HET QUIZ SPEELSCHERM (Gameplay)
+   ========================================================================== */
 .quiz-container {
     background: #ffffff;
-    padding: 40px 30px;
-    border-radius: 24px;
-    border: 2px solid #000;
+    border: 1px solid #e5e7eb;
+    padding: 40px;
+    border-radius: 16px;
     width: 100%;
-    max-width: 520px;
-    text-align: center;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+    max-width: 600px;
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.05);
 }
 
-.hidden {
-    display: none !important;
-}
+.hidden { display: none !important; }
 
 .quiz-header {
     display: flex;
     justify-content: space-between;
-    font-size: 0.95rem;
-    color: #666;
-    margin-bottom: 20px;
-    border-bottom: 1px solid #eee;
-    padding-bottom: 12px;
+    font-size: 0.9rem;
+    color: #6b7280;
+    font-weight: 600;
+    margin-bottom: 24px;
+    padding-bottom: 16px;
+    border-bottom: 1px solid #f3f4f6;
+}
+
+#quiz-screen h2 {
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: #111827;
+    margin-bottom: 24px;
 }
 
 .options-grid {
     display: flex;
     flex-direction: column;
-    gap: 14px;
-    margin-top: 20px;
+    gap: 12px;
 }
 
 .option-btn {
     background-color: #ffffff;
-    color: #222;
-    border: 2px solid #e0e0e0;
-    border-radius: 12px;
-    padding: 14px 20px;
+    color: #374151;
+    border: 1px solid #d1d5db;
+    border-radius: 8px;
+    padding: 16px 20px;
     text-align: left;
     font-size: 1rem;
     font-weight: 500;
@@ -187,21 +241,25 @@ body {
 }
 
 .option-btn:hover {
-    border-color: #000000;
-    background-color: #f9f9f9;
+    border-color: #0f172a;
+    background-color: #f8fafc;
+    color: #0f172a;
 }
 
 .restart-btn {
-    background: #000;
-    color: #fff;
+    background-color: #0f172a;
+    color: #ffffff;
     border: none;
-    padding: 14px 30px;
-    border-radius: 12px;
+    padding: 14px 24px;
+    border-radius: 8px;
     cursor: pointer;
     font-weight: 600;
-    margin-top: 25px;
-    transition: background 0.2s;
+    font-size: 1rem;
+    margin-top: 24px;
+    width: 100%;
+    transition: background-color 0.2s;
 }
+
 .restart-btn:hover {
-    background: #333;
+    background-color: #334155;
 }
