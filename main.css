@@ -23,25 +23,31 @@ body {
 }
 
 /* --- HET LUFFY STROHOED PATROON (Werkt gegarandeerd) --- */
+/* --- HET LUFFY STROHOED PATROON (Gecorrigeerd) --- */
+/* --- HET LUFFY STROHOED PATROON --- */
 body::before {
     content: "";
-    position: fixed; /* Zorgt ervoor dat het patroon vast blijft staan als je scrollt */
-    top: 0;
-    left: 0;
-    width: 100vw;
-    height: 100vh;
+    position: fixed; 
     
-    /* We gebruiken een gecodeerde vectorafbeelding van een strohoed (Straw Hat) */
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='0.9em' font-size='70'%3E👒%3C/text%3E%3C/svg%3E");
+    /* Maak de laag groter zodat we schuin kunnen draaien zonder lege hoeken */
+    top: -50%;
+    left: -50%;
+    width: 200vw;
+    height: 200vh;
     
-    background-size: 80px 80px; /* Bepaalt hoe groot de hoedjes zijn */
-    background-repeat: repeat; /* Herhaalt het logo over het hele scherm */
+    /* Hier roepen we jouw opgeslagen plaatje op! */
+    background-image: url('hat.png');
     
-    opacity: 0.08; /* Subtiel watermerk effect (verhoog naar 0.20 als je ze nóg duidelijker wilt) */
-    z-index: -1; /* Zorgt dat het patroon achter je quiz-kaarten zit */
-    pointer-events: none; /* Zorgt dat het patroon niet in de weg zit bij het klikken */
+    /* Grootte en verspreiding */
+    background-size: 160px 160px; /* Maakt jouw plaatje mooi groot */
+    background-repeat: repeat;
+    
+    transform: rotate(-15deg); /* Zet ze schuin */
+    
+    opacity: 0.15; /* Zorgt voor een mooie zichtbaarheid op de grijze achtergrond */
+    z-index: -1; 
+    pointer-events: none; 
 }
-
 /* ==========================================================================
    2. STARTPAGINA (INDEX)
    ========================================================================== */
@@ -107,7 +113,7 @@ body::before {
 .card-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 24px;
+    gap: 33px;
     width: 100%;
 }
 
