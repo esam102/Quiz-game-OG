@@ -40,13 +40,26 @@ body {
     padding: 48px 20px;
     line-height: 1.6;
     position: relative;
-
-    background-color: var(--parchment);
-    background-image:
-        radial-gradient(ellipse at 20% 15%, rgba(255,255,255,0.35) 0%, transparent 45%),
-        radial-gradient(ellipse at 85% 90%, rgba(0,0,0,0.10) 0%, transparent 50%),
-        radial-gradient(ellipse at center, rgba(0,0,0,0.02) 0%, rgba(0,0,0,0.18) 100%);
     overflow-x: hidden;
+    
+    /* JOUW NIEUWE SCHATKAART ACHTERGROND */
+    background-color: var(--parchment);
+    background-image: url('schatkaart.jpg'); /* Zorg dat de naam precies klopt met je plaatje! */
+    background-size: cover;
+    background-attachment: fixed; /* Zorgt dat de kaart blijft staan als je scrolt */
+    background-position: center;
+    
+    /* Dit maakt de achtergrond nét iets donkerder zodat je quiz-kaarten er mooi uit knallen */
+    box-shadow: inset 0 0 0 1000px rgba(0, 0, 0, 0.4); 
+}
+
+.logo-circle img {
+    width: 74%;
+    height: 74%;
+    object-fit: contain;
+    /* Hiermee wordt de witte achtergrond weggefilterd */
+    mix-blend-mode: multiply; 
+    filter: drop-shadow(0 2px 2px rgba(0,0,0,0.25));
 }
 
 /* Papierkorrel (fijne ruis via SVG-filter i.p.v. herhaald emoji-patroon) */
@@ -540,7 +553,7 @@ body::before {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 14px 32px;
+    padding: 4px 3px;
     background: linear-gradient(180deg, var(--parchment-dark) 0%, rgba(226,211,171,0.96) 100%);
     border-bottom: 3px solid var(--ink);
     box-shadow: 0 6px 14px rgba(43,33,24,0.25);
