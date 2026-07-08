@@ -3,16 +3,17 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ultieme Anime Quiz</title>
+    <title>Anime & Gaming Quiz — Kies je Avontuur</title>
+    <link rel="icon" type="image/png" href="hat.png">
     <link rel="stylesheet" href="main.css">
 </head>
 <body>
 
     <div class="welcome-container">
         <div class="logo-circle">
-            <span class="logo-emoji">🏴‍☠️</span>
+            <img src="hat.png" alt="Strohoed">
         </div>
-        
+
         <h1 class="welcome-title">Anime & Gaming Quiz</h1>
         <p class="welcome-text">
             Test je kennis in epische categorieën. Bewijs dat jij de ultieme expert bent in de wereld van anime, series en games!
@@ -23,7 +24,7 @@
             <span class="badge">🎮 Gaming</span>
             <span class="badge">👒 One Piece</span>
         </div>
-        
+
         <a href="quiz.html" class="start-btn">
             Start het Avontuur
             <svg class="arrow-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -32,31 +33,30 @@
             </svg>
         </a>
     </div>
-<audio id="bg-music" loop>
-            <source src="music.mp3" type="audio/mpeg">
-        </audio>
 
-        <button id="music-btn" class="music-toggle" onclick="toggleMusic()">
-            🔇 Muziek Uit
-        </button>
+    <audio id="bg-music" loop>
+        <source src="music.mp3" type="audio/mpeg">
+    </audio>
 
-        <script>
-            const music = document.getElementById("bg-music");
-            const musicBtn = document.getElementById("music-btn");
-            let isPlaying = false;
+    <button id="music-btn" class="music-toggle" onclick="toggleMusic()">
+        🔇 Muziek Uit
+    </button>
 
-            function toggleMusic() {
-                if (isPlaying) {
-                    music.pause();
-                    musicBtn.innerHTML = "🔇 Muziek Uit";
-                } else {
-                    music.play();
-                    musicBtn.innerHTML = "🔊 Muziek Aan";
-                }
-                isPlaying = !isPlaying;
+    <script>
+        const music = document.getElementById("bg-music");
+        const musicBtn = document.getElementById("music-btn");
+        let isPlaying = false;
+
+        function toggleMusic() {
+            if (isPlaying) {
+                music.pause();
+                musicBtn.innerHTML = "🔇 Muziek Uit";
+            } else {
+                music.play();
+                musicBtn.innerHTML = "🔊 Muziek Aan";
             }
-        </script>
-    </div> </body>
-</html>
+            isPlaying = !isPlaying;
+        }
+    </script>
 </body>
 </html>

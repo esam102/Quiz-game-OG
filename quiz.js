@@ -54,6 +54,7 @@ const quizDatabase = {
 let activeQuestions = [];
 let currentQuestionIndex = 0;
 let userScore = 0;
+let isAnswering = false; // blocks double-clicks while feedback is showing
 
 // Starts a selected quiz
 function startQuiz(quizKey) {
@@ -70,51 +71,69 @@ function startQuiz(quizKey) {
 
 // Renders the current question and option buttons
 function loadQuestion() {
+    isAnswering = false;
     const currentQuestion = activeQuestions[currentQuestionIndex];
-    
+
     // Update Header Status
-    document.getElementById('progress-text').innerText = `Vraag ${currentQuestionIndex + 1} / 10`;
+    document.getElementById('progress-text').innerText = `Vraag ${currentQuestionIndex + 1} / ${activeQuestions.length}`;
     document.getElementById('score-text').innerText = `Score: ${userScore}`;
-    
+
     // Set Question Title
     document.getElementById('question-text').innerText = currentQuestion.q;
-    
+
     // Clear old buttons and generate new ones
     const container = document.getElementById('options-container');
     container.innerHTML = "";
-    
+
     currentQuestion.a.forEach((optionText, index) => {
         const button = document.createElement('button');
         button.innerText = optionText;
         button.classList.add('option-btn');
-        button.onclick = () => checkAnswer(index);
+        button.onclick = () => checkAnswer(index, button);
         container.appendChild(button);
     });
 }
 
-// Processes answer validation
-function checkAnswer(selectedIndex) {
+// Processes answer validation, shows correct/wrong feedback, then advances
+function checkAnswer(selectedIndex, buttonEl) {
+    if (isAnswering) return;
+    isAnswering = true;
+
     const currentQuestion = activeQuestions[currentQuestionIndex];
-    
-    if (selectedIndex === currentQuestion.correct) {
+    const allButtons = document.querySelectorAll('#options-container .option-btn');
+    const isCorrect = selectedIndex === currentQuestion.correct;
+
+    if (isCorrect) {
         userScore++;
+        document.getElementById('score-text').innerText = `Score: ${userScore}`;
     }
-    
-    currentQuestionIndex++;
-    
-    // Check if there are more questions left
-    if (currentQuestionIndex < activeQuestions.length) {
-        loadQuestion();
-    } else {
-        showResults();
-    }
+
+    // Reveal correct answer and mark the pick, then lock the options
+    allButtons.forEach((btn, index) => {
+        btn.disabled = true;
+        if (index === currentQuestion.correct) {
+            btn.classList.add('correct');
+        } else if (index === selectedIndex) {
+            btn.classList.add('wrong');
+        }
+    });
+
+    // Brief pause so the player sees the result before moving on
+    setTimeout(() => {
+        currentQuestionIndex++;
+        if (currentQuestionIndex < activeQuestions.length) {
+            loadQuestion();
+        } else {
+            showResults();
+        }
+    }, 900);
 }
 
 // Switches to final score screen
 function showResults() {
     document.getElementById('quiz-screen').classList.add('hidden');
     document.getElementById('results-screen').classList.remove('hidden');
-    document.getElementById('final-score-text').innerText = `Je scoorde ${userScore} van de 10`;
+    document.getElementById('final-score-text').innerText = `Je scoorde ${userScore} van de ${activeQuestions.length}`;
 }
 
 // Resets back to home dashboard

@@ -4,13 +4,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Kies Je Quiz</title>
+    <link rel="icon" type="image/png" href="hat.png">
     <link rel="stylesheet" href="main.css">
 </head>
 <body>
 
     <div id="selector-screen" class="home-wrapper">
         <h1 class="main-title">Kies je Categorie</h1>
-        
+
         <div class="card-grid">
             <div class="quiz-card bg-1">
                 <div class="card-content">
@@ -55,22 +56,22 @@
             <span id="progress-text" class="status-badge">Vraag 1/10</span>
             <span id="score-text" class="status-badge score-badge">Score: 0</span>
         </div>
-        
+
         <h2 id="question-text" class="question-title">Hier komt de vraag?</h2>
-        
+
         <div id="options-container" class="options-grid">
-            </div>
+        </div>
     </div>
 
-    <div id="results-screen" class="quiz-container hidden text-center">
+    <div id="results-screen" class="quiz-container hidden">
         <div class="logo-circle" style="margin: 0 auto 24px auto;">
-            <span class="logo-emoji">🏆</span>
+            <img src="hat.png" alt="Strohoed">
         </div>
         <h1 class="welcome-title">Quiz Voltooid!</h1>
-        <p id="final-score-text" class="welcome-text" style="font-size: 1.25rem; font-weight: 600; color: #0f172a;">
+        <p id="final-score-text" class="welcome-text" style="font-style: normal; font-size: 1.2rem; font-weight: 700; color: var(--ink);">
             Je scoorde 0 van de 10
         </p>
-        
+
         <button onclick="resetGame()" class="start-btn" style="margin-top: 20px;">
             Terug naar Menu
             <svg class="arrow-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">

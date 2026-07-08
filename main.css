@@ -1,398 +1,490 @@
 /* ==========================================================================
-   1. BASIS & LUFFY ACHTERGROND (Grijze Editie)
+   SCHATKAART LOGBOEK — design tokens
+   Kleur:  perkament #EDE3C7 / schaduw #C9B48C / inkt #2B2118
+           lakzegel-rood #9B3A2E / oud-goud #B8862E / kompas-teal #33635C
+   Type:   'Pirata One'      → logo & grote titel (piratenposter)
+           'Libre Baskerville'→ leesbare tekst, vragen, koppen in kaarten
+           'Special Elite'    → typemachine/gestempelde labels & knoppen
    ========================================================================== */
+@import url('https://fonts.googleapis.com/css2?family=Pirata+One&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Special+Elite&display=swap');
+
+:root {
+    --parchment: #efe4c8;
+    --parchment-dark: #e2d3ab;
+    --paper-shadow: #b9a06e;
+    --ink: #2b2118;
+    --ink-soft: #5a4a37;
+    --wax: #9b3a2e;
+    --wax-dark: #7a2c22;
+    --gold: #b8862e;
+    --teal: #33635c;
+    --rope: #8a6a3f;
+}
+
 * {
     box-sizing: border-box;
     margin: 0;
     padding: 0;
 }
 
+/* ==========================================================================
+   1. BASIS & PERKAMENT ACHTERGROND
+   ========================================================================== */
 body {
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-    color: #0f172a; 
+    font-family: 'Libre Baskerville', serif;
+    color: var(--ink);
     min-height: 100vh;
     display: flex;
     justify-content: center;
     align-items: center;
-    padding: 40px 20px;
-    line-height: 1.5;
+    padding: 48px 20px;
+    line-height: 1.6;
+    position: relative;
 
-    /* Rustige, strakke zilvergrijze achtergrond */
-    background-color: #d1d5db; 
-    position: relative; 
+    background-color: var(--parchment);
+    background-image:
+        radial-gradient(ellipse at 20% 15%, rgba(255,255,255,0.35) 0%, transparent 45%),
+        radial-gradient(ellipse at 85% 90%, rgba(0,0,0,0.10) 0%, transparent 50%),
+        radial-gradient(ellipse at center, rgba(0,0,0,0.02) 0%, rgba(0,0,0,0.18) 100%);
+    overflow-x: hidden;
 }
 
-/* Het Luffy Watermerk Patroon */
+/* Papierkorrel (fijne ruis via SVG-filter i.p.v. herhaald emoji-patroon) */
 body::before {
     content: "";
-    position: fixed; 
-    top: -50%;
-    left: -50%;
-    width: 200vw;
-    height: 200vh;
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='0.9em' font-size='70'%3E👒%3C/text%3E%3C/svg%3E");
-    background-size: 150px 150px; 
-    background-repeat: repeat;
-    transform: rotate(-15deg); 
-    opacity: 0.20; 
-    z-index: -1; 
-    pointer-events: none; 
+    position: fixed;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix type='matrix' values='0 0 0 0 0.16  0 0 0 0 0.13  0 0 0 0 0.09  0 0 0 0.35 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+    opacity: 0.5;
+    mix-blend-mode: multiply;
+    pointer-events: none;
+    z-index: 0;
 }
 
 /* ==========================================================================
-   2. STARTPAGINA (Ultra Professioneel Redesign)
+   2. GEDEELDE "PAPIEREN KAART" BASIS — gebruikt door alle schermen
    ========================================================================== */
-.welcome-container {
-    background: #ffffff;
-    padding: 50px 40px;
-    border-radius: 24px;
-    width: 100%;
-    max-width: 500px;
-    text-align: center;
-    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.08); /* Zachte, zwevende schaduw */
+.welcome-container,
+.quiz-container,
+.home-wrapper {
     position: relative;
-    overflow: hidden;
+    z-index: 1;
 }
 
-/* Dit zorgt voor de professionele kleurlijn bovenaan de witte kaart */
-.welcome-container::before {
+.welcome-container,
+.quiz-container {
+    background: var(--parchment-dark);
+    padding: 52px 44px;
+    width: 100%;
+    max-width: 520px;
+    text-align: center;
+    position: relative;
+    border: 1px solid rgba(43,33,24,0.15);
+    box-shadow:
+        0 2px 0 rgba(255,255,255,0.4) inset,
+        0 30px 50px -20px rgba(43,33,24,0.45);
+    /* licht onregelmatige, "gescheurde" hoeken i.p.v. perfecte border-radius */
+    clip-path: polygon(
+        0% 2%, 3% 0%, 97% 1%, 100% 3%,
+        99% 97%, 96% 100%, 4% 99%, 0% 96%
+    );
+}
+
+/* Verweerde vlekken op de kaart */
+.welcome-container::after,
+.quiz-container::after {
     content: "";
     position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 6px;
-    background: linear-gradient(90deg, #3b82f6, #8b5cf6, #ec4899);
+    inset: 0;
+    background:
+        radial-gradient(circle at 88% 12%, rgba(155,58,46,0.06) 0%, transparent 12%),
+        radial-gradient(circle at 8% 85%, rgba(43,33,24,0.07) 0%, transparent 18%);
+    pointer-events: none;
 }
 
 .logo-circle {
-    width: 80px;
-    height: 80px;
-    background: #f8fafc; /* Heel licht grijs-blauw voor de avatar */
+    width: 96px;
+    height: 96px;
+    background: var(--parchment);
     border-radius: 50%;
     display: flex;
     justify-content: center;
     align-items: center;
-    margin: 0 auto 24px auto;
-    box-shadow: 0 8px 16px rgba(0,0,0,0.06);
-    border: 2px solid #ffffff;
-    transition: transform 0.3s ease;
+    margin: 0 auto 22px auto;
+    border: 3px solid var(--ink);
+    box-shadow: 0 0 0 5px var(--parchment-dark), 0 6px 14px rgba(43,33,24,0.35);
+    transition: transform 0.35s ease;
+    overflow: hidden;
 }
 
 .welcome-container:hover .logo-circle {
-    transform: translateY(-5px) scale(1.05); /* Veert op als je over de kaart beweegt */
+    transform: rotate(-8deg) scale(1.04);
 }
 
 .logo-emoji {
-    font-size: 40px; /* Mooi formaat in de avatar cirkel */
+    font-size: 44px;
+}
+
+.logo-circle img {
+    width: 74%;
+    height: 74%;
+    object-fit: contain;
+    filter: drop-shadow(0 2px 2px rgba(0,0,0,0.25));
 }
 
 .welcome-title {
-    font-size: 2rem;
-    font-weight: 800;
-    color: #0f172a;
-    margin-bottom: 12px;
-    letter-spacing: -0.03em;
+    font-family: 'Pirata One', serif;
+    font-size: 2.6rem;
+    font-weight: 400;
+    color: var(--ink);
+    margin-bottom: 14px;
+    letter-spacing: 0.02em;
+    text-shadow: 1px 1px 0 rgba(255,255,255,0.3);
 }
 
 .welcome-text {
-    color: #64748b;
-    font-size: 1.05rem;
-    line-height: 1.6;
-    margin-bottom: 24px;
+    color: var(--ink-soft);
+    font-size: 1.02rem;
+    font-style: italic;
+    line-height: 1.7;
+    margin-bottom: 26px;
+    padding: 0 6px;
 }
 
-/* De stijl voor de kleine categorie 'tags' */
+/* Badges = kleine lakzegel-achtige stempels, licht scheefgezet */
 .badges-container {
     display: flex;
     justify-content: center;
-    gap: 10px;
-    margin-bottom: 32px;
+    gap: 12px;
+    margin-bottom: 34px;
     flex-wrap: wrap;
 }
 
 .badge {
-    background: #f1f5f9;
-    border: 1px solid #e2e8f0;
-    color: #475569;
-    padding: 6px 14px;
-    border-radius: 20px;
-    font-size: 0.85rem;
-    font-weight: 600;
-    letter-spacing: 0.02em;
+    background: var(--parchment);
+    border: 1.5px solid var(--ink);
+    color: var(--ink);
+    padding: 7px 14px;
+    border-radius: 3px;
+    font-family: 'Special Elite', monospace;
+    font-size: 0.78rem;
+    letter-spacing: 0.03em;
+    box-shadow: 2px 2px 0 rgba(43,33,24,0.18);
 }
+.badge:nth-child(1) { transform: rotate(-3deg); }
+.badge:nth-child(2) { transform: rotate(1.5deg); }
+.badge:nth-child(3) { transform: rotate(-1deg); }
 
+/* Start-knop: gebrandmerkt houten bord i.p.v. strak SaaS-button */
 .start-btn {
     display: flex;
     align-items: center;
     justify-content: center;
     gap: 10px;
     text-decoration: none;
-    background: #0f172a;
-    color: #ffffff;
-    font-size: 1.1rem;
-    font-weight: 600;
-    padding: 16px 24px;
-    border-radius: 14px;
+    background: var(--ink);
+    color: var(--parchment);
+    font-family: 'Special Elite', monospace;
+    font-size: 1rem;
+    letter-spacing: 0.04em;
+    padding: 17px 24px;
+    border: 2px solid var(--ink);
+    border-radius: 4px;
     width: 100%;
-    transition: all 0.2s ease;
+    position: relative;
+    transition: transform 0.15s ease, box-shadow 0.15s ease;
+    box-shadow: 3px 3px 0 var(--wax-dark);
 }
 
 .start-btn:hover {
-    background: #1e293b;
-    transform: translateY(-2px);
-    box-shadow: 0 10px 20px rgba(15, 23, 42, 0.15);
+    transform: translate(-2px, -2px);
+    box-shadow: 5px 5px 0 var(--wax-dark);
 }
 
-/* Animatie voor de SVG-pijl in de knop */
+.start-btn:active {
+    transform: translate(1px, 1px);
+    box-shadow: 1px 1px 0 var(--wax-dark);
+}
+
 .arrow-icon {
     transition: transform 0.2s ease;
 }
 
 .start-btn:hover .arrow-icon {
-    transform: translateX(5px); /* Schuift de pijl naar rechts op hover */
+    transform: translateX(5px);
 }
 
 /* ==========================================================================
-   3. QUIZ SELECTIESCHERM & KAARTEN (Blijft Ongewijzigd)
+   3. QUIZ SELECTIESCHERM — verspreide kaartfragmenten
    ========================================================================== */
 .home-wrapper {
     width: 100%;
-    max-width: 1100px;
+    max-width: 1080px;
     text-align: center;
 }
 
 .main-title {
-    font-size: 2.5rem;
-    font-weight: 800;
-    margin-bottom: 40px;
-    color: #0f172a;
-    letter-spacing: -0.02em;
+    font-family: 'Pirata One', serif;
+    font-size: 2.6rem;
+    font-weight: 400;
+    margin-bottom: 44px;
+    color: var(--ink);
+    letter-spacing: 0.02em;
 }
 
 .card-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 24px;
+    gap: 30px;
     width: 100%;
 }
 
 .quiz-card {
-    background-color: #ffffff;
-    border: 1px solid #e5e7eb;
-    border-radius: 20px;
-    height: 400px; 
+    background-color: var(--ink);
+    border: 3px solid var(--ink);
+    border-radius: 6px;
+    height: 400px;
     position: relative;
     overflow: hidden;
     display: flex;
     flex-direction: column;
-    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+    box-shadow: 6px 6px 0 rgba(43,33,24,0.28);
     transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
+/* Punaise bovenaan elke kaart */
+.quiz-card::before {
+    content: "";
+    position: absolute;
+    top: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 14px;
+    height: 14px;
+    background: radial-gradient(circle at 35% 30%, #e2b04a, var(--gold));
+    border-radius: 50%;
+    box-shadow: 0 2px 3px rgba(0,0,0,0.5);
+    z-index: 3;
+}
+
+.quiz-card:nth-child(odd)  { transform: rotate(-1.2deg); }
+.quiz-card:nth-child(even) { transform: rotate(1deg); }
+
 .quiz-card:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 15px 25px -3px rgba(0, 0, 0, 0.1);
+    transform: translateY(-6px) rotate(0deg) scale(1.02);
+    box-shadow: 9px 9px 0 rgba(43,33,24,0.32);
+    z-index: 2;
 }
 
 .card-content {
-    background: linear-gradient(to top, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0.4) 50%, rgba(0,0,0,0.1) 100%);
+    background: linear-gradient(to top, rgba(20,15,10,0.94) 0%, rgba(20,15,10,0.45) 55%, rgba(20,15,10,0.08) 100%);
     width: 100%;
     height: 100%;
-    padding: 24px;
+    padding: 26px 22px 22px;
     display: flex;
     flex-direction: column;
-    justify-content: flex-end; 
+    justify-content: flex-end;
     align-items: flex-start;
     text-align: left;
 }
 
 .quiz-card h2 {
-    font-size: 1.5rem;
-    font-weight: 700;
-    color: #ffffff;
+    font-family: 'Pirata One', serif;
+    font-size: 1.7rem;
+    font-weight: 400;
+    color: var(--parchment);
     margin-bottom: 8px;
+    letter-spacing: 0.02em;
 }
 
 .card-desc {
     font-size: 0.9rem;
-    color: #e5e7eb;
-    margin-bottom: 16px;
-    line-height: 1.4;
+    font-style: italic;
+    color: #e7dcc4;
+    margin-bottom: 14px;
+    line-height: 1.45;
 }
 
 .card-counter {
-    font-size: 0.85rem;
-    color: #9ca3af;
-    font-weight: 600;
+    font-family: 'Special Elite', monospace;
+    font-size: 0.75rem;
+    color: var(--gold);
     text-transform: uppercase;
-    letter-spacing: 0.05em;
+    letter-spacing: 0.08em;
     margin-bottom: 16px;
 }
 
 .card-btn {
-    background-color: #ffffff;
-    color: #111827;
-    border: none;
-    border-radius: 8px;
-    padding: 12px 20px;
-    font-size: 0.95rem;
-    font-weight: 700;
+    background-color: var(--parchment);
+    color: var(--ink);
+    border: 2px solid var(--ink);
+    border-radius: 4px;
+    padding: 11px 18px;
+    font-family: 'Special Elite', monospace;
+    font-size: 0.85rem;
+    letter-spacing: 0.03em;
     cursor: pointer;
     width: 100%;
-    transition: background-color 0.2s;
+    transition: background-color 0.2s, transform 0.15s;
 }
 
 .card-btn:hover {
-    background-color: #f3f4f6;
+    background-color: #fff8e6;
+    transform: translateY(-2px);
 }
 
-/* Achtergrondafbeeldingen */
-.bg-1 { background-image: url('https://images.unsplash.com/photo-1607604276583-eef5d076aa5f?w=500'); background-size: cover; background-position: center; }
-.bg-2 { background-image: url('https://images.unsplash.com/photo-1578632767115-351597cf2477?w=500'); background-size: cover; background-position: center; }
-.bg-3 { background-image: url('https://images.unsplash.com/photo-1538481199705-c710c4e965fc?w=500'); background-size: cover; background-position: center; }
-.bg-4 { background-image: url('https://images.unsplash.com/photo-1536440136628-849c177e76a1?w=500'); background-size: cover; background-position: center; }
+/* Achtergrondafbeeldingen — verzadiging omlaag, sepia voor logboek-sfeer */
+.bg-1 { background-image: url('https://images.unsplash.com/photo-1607604276583-eef5d076aa5f?w=500'); background-size: cover; background-position: center; filter: sepia(0.35) contrast(1.05); }
+.bg-2 { background-image: url('https://images.unsplash.com/photo-1578632767115-351597cf2477?w=500'); background-size: cover; background-position: center; filter: sepia(0.35) contrast(1.05); }
+.bg-3 { background-image: url('https://images.unsplash.com/photo-1538481199705-c710c4e965fc?w=500'); background-size: cover; background-position: center; filter: sepia(0.35) contrast(1.05); }
+.bg-4 { background-image: url('https://images.unsplash.com/photo-1536440136628-849c177e76a1?w=500'); background-size: cover; background-position: center; filter: sepia(0.35) contrast(1.05); }
 
 /* ==========================================================================
-   4. HET QUIZ SPEELSCHERM (Gameplay)
+   4. HET QUIZ SPEELSCHERM — scheepslogboek
    ========================================================================== */
-/* ==========================================================================
-   4. HET QUIZ SPEELSCHERM (Professionele Gameplay)
-   ========================================================================== */
-.quiz-container {
-    background: #ffffff;
-    padding: 40px;
-    border-radius: 24px;
-    width: 100%;
-    max-width: 600px;
-    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.08);
-    position: relative;
-    overflow: hidden;
-    text-align: center; /* Zorgt dat het resultatenscherm netjes in het midden staat */
-}
-
-/* De gekleurde streep bovenaan, net als bij de welkomstpagina */
-.quiz-container::before {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 6px;
-    background: linear-gradient(90deg, #3b82f6, #8b5cf6, #ec4899);
-}
-
 .hidden { display: none !important; }
 
-/* De nieuwe Status Balk */
 .quiz-status-bar {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background: #f8fafc;
-    border: 1px solid #e2e8f0;
+    background: var(--parchment);
+    border: 1.5px dashed var(--ink-soft);
     padding: 12px 20px;
-    border-radius: 14px;
-    margin-bottom: 24px;
+    border-radius: 4px;
+    margin-bottom: 28px;
 }
 
 .status-badge {
-    font-size: 0.95rem;
-    font-weight: 700;
-    color: #475569;
+    font-family: 'Special Elite', monospace;
+    font-size: 0.85rem;
+    color: var(--ink-soft);
+    letter-spacing: 0.02em;
 }
 
 .score-badge {
-    color: #10b981; /* Fris groen voor de score */
+    color: var(--teal);
 }
 
 .question-title {
-    font-size: 1.4rem;
-    font-weight: 800;
-    color: #0f172a;
+    font-family: 'Libre Baskerville', serif;
+    font-weight: 700;
+    font-size: 1.35rem;
+    color: var(--ink);
     margin-bottom: 30px;
     line-height: 1.5;
-    text-align: left; /* Vragen lezen fijner als ze links zijn uitgelijnd */
+    text-align: left;
 }
 
-/* --- HET MAGISCHE A, B, C, D ANTWOORDEN SYSTEEM --- */
+/* --- ANTWOORDEN: gestempelde reepjes, A/B/C/D gebrand als een merkteken --- */
 .options-grid {
     display: flex;
     flex-direction: column;
     gap: 14px;
-    counter-reset: optionCounter; /* Start een teller voor de knoppen */
+    counter-reset: optionCounter;
 }
 
 .option-btn {
     position: relative;
-    background-color: #ffffff;
-    color: #334155;
-    border: 2px solid #e2e8f0;
-    border-radius: 16px;
-    /* Extra ruimte links (56px) zodat het letter-icoontje past */
-    padding: 16px 20px 16px 56px; 
+    background-color: var(--parchment);
+    color: var(--ink);
+    border: 2px solid var(--ink-soft);
+    border-radius: 4px;
+    padding: 15px 20px 15px 58px;
     text-align: left;
-    font-size: 1.05rem;
-    font-weight: 600;
+    font-family: 'Libre Baskerville', serif;
+    font-size: 1rem;
     cursor: pointer;
-    transition: all 0.2s ease;
+    transition: all 0.15s ease;
     display: flex;
     align-items: center;
 }
 
-/* Tekent automatisch een A, B, C, D in het vierkantje */
 .option-btn::before {
     counter-increment: optionCounter;
-    content: counter(optionCounter, upper-alpha); /* A, B, C of D */
+    content: counter(optionCounter, upper-alpha);
     position: absolute;
-    left: 14px;
-    background: #f1f5f9;
-    color: #64748b;
-    border: 1px solid #e2e8f0;
+    left: 12px;
+    background: transparent;
+    color: var(--ink);
+    border: 2px solid var(--ink);
     width: 30px;
     height: 30px;
-    border-radius: 8px;
+    border-radius: 50%;
     display: flex;
     justify-content: center;
     align-items: center;
-    font-size: 0.9rem;
-    font-weight: 800;
-    transition: all 0.2s ease;
+    font-family: 'Special Elite', monospace;
+    font-size: 0.85rem;
+    transform: rotate(-4deg);
+    transition: all 0.15s ease;
 }
 
-/* Hover Effecten */
 .option-btn:hover {
-    border-color: #0f172a;
-    background-color: #f8fafc;
-    transform: translateY(-2px);
-    box-shadow: 0 6px 15px rgba(0,0,0,0.06);
-    color: #0f172a;
+    border-color: var(--ink);
+    background-color: #fff8e6;
+    transform: translateX(3px);
 }
 
-/* Het A, B, C, D blokje kleurt mee als je eroverheen gaat! */
 .option-btn:hover::before {
-    background: #0f172a;
-    color: #ffffff;
-    border-color: #0f172a;
+    background: var(--ink);
+    color: var(--parchment);
+    transform: rotate(0deg);
+}
+
+.option-btn:disabled {
+    cursor: default;
+}
+
+.option-btn.correct {
+    background-color: #dfe9d8;
+    border-color: var(--teal);
+    color: var(--teal);
+}
+.option-btn.correct::before {
+    background: var(--teal);
+    border-color: var(--teal);
+    color: var(--parchment);
+    content: "✓";
+}
+
+.option-btn.wrong {
+    background-color: #f1dcd7;
+    border-color: var(--wax);
+    color: var(--wax-dark);
+}
+.option-btn.wrong::before {
+    background: var(--wax);
+    border-color: var(--wax);
+    color: var(--parchment);
+    content: "✕";
 }
 
 /* ==========================================================================
-   5. ZWEVENDE MUZIEK KNOP
+   5. RESULTATENSCHERM
+   ========================================================================== */
+#results-screen .logo-circle {
+    border-color: var(--gold);
+}
+
+/* ==========================================================================
+   6. ZWEVENDE MUZIEK KNOP — kompasje in de hoek
    ========================================================================== */
 .music-toggle {
     position: fixed;
-    bottom: 30px;
-    right: 30px;
-    background: #ffffff;
-    border: 2px solid #e2e8f0;
-    color: #0f172a;
-    padding: 12px 20px;
+    bottom: 28px;
+    right: 28px;
+    background: var(--parchment);
+    border: 2px solid var(--ink);
+    color: var(--ink);
+    padding: 11px 18px;
     border-radius: 30px;
-    font-size: 1rem;
-    font-weight: 700;
+    font-family: 'Special Elite', monospace;
+    font-size: 0.82rem;
+    letter-spacing: 0.02em;
     cursor: pointer;
-    box-shadow: 0 10px 20px rgba(0,0,0,0.1);
-    transition: all 0.2s ease;
+    box-shadow: 3px 3px 0 rgba(43,33,24,0.3);
+    transition: all 0.15s ease;
     z-index: 1000;
     display: flex;
     align-items: center;
@@ -400,36 +492,23 @@ body::before {
 }
 
 .music-toggle:hover {
-    transform: translateY(-5px) scale(1.05); 
-    box-shadow: 0 15px 25px rgba(0,0,0,0.15);
-    border-color: #3b82f6; 
+    transform: translate(-2px, -2px);
+    box-shadow: 5px 5px 0 rgba(43,33,24,0.3);
 }
 
 /* ==========================================================================
-   5. ZWEVENDE MUZIEK KNOP
+   7. RESPONSIVE
    ========================================================================== */
-.music-toggle {
-    position: fixed;
-    bottom: 30px;
-    right: 30px;
-    background: #ffffff;
-    border: 1px solid #e2e8f0;
-    color: #0f172a;
-    padding: 12px 20px;
-    border-radius: 30px;
-    font-size: 0.95rem;
-    font-weight: 600;
-    cursor: pointer;
-    box-shadow: 0 10px 20px rgba(0,0,0,0.08);
-    transition: all 0.2s ease;
-    z-index: 1000;
-    display: flex;
-    align-items: center;
-    gap: 8px;
+@media (max-width: 480px) {
+    .welcome-container, .quiz-container { padding: 38px 24px; }
+    .welcome-title, .main-title { font-size: 2.1rem; }
+    .quiz-card { height: 340px; }
 }
 
-.music-toggle:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 15px 25px rgba(0,0,0,0.12);
-    border-color: #cbd5e1;
+/* Respecteer 'verminderde beweging'-voorkeur van de gebruiker */
+@media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+        transition-duration: 0.001ms !important;
+        animation-duration: 0.001ms !important;
+    }
 }
