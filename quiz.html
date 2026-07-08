@@ -9,6 +9,30 @@
 </head>
 <body>
 
+
+     <nav class="site-nav">
+        <a href="index.html" class="brand">
+            <span class="brand-icon">☠️</span>
+            <span class="brand-title">Anime & Gaming Quiz</span>
+        </a>
+        <ul class="nav-links">
+            <li><a href="index.html" class="active">Home</a></li>
+            <li><a href="quiz.html">Categorieën</a></li>
+        </ul>
+    </nav>
+
+    <svg class="compass-deco" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="50" cy="50" r="46" fill="none" stroke="#2b2118" stroke-width="1.5"/>
+        <circle cx="50" cy="50" r="38" fill="none" stroke="#2b2118" stroke-width="1"/>
+        <g stroke="#2b2118" stroke-width="1">
+            <line x1="50" y1="4" x2="50" y2="96"/>
+            <line x1="4" y1="50" x2="96" y2="50"/>
+        </g>
+        <polygon points="50,14 56,50 50,86 44,50" fill="#9b3a2e"/>
+        <polygon points="14,50 50,44 86,50 50,56" fill="#2b2118"/>
+    </svg>
+
+
     <div id="selector-screen" class="home-wrapper">
         <h1 class="main-title">Kies je Categorie</h1>
 
@@ -46,6 +70,24 @@
                     <p class="card-desc">Herken jij alle blockbusters en hitseries? Test je popcultuur kennis.</p>
                     <span class="card-counter">10 Vragen</span>
                     <button class="card-btn" onclick="startQuiz('movies')">Speel Nu</button>
+                </div>
+            </div>
+
+            <div class="quiz-card bg-5">
+                <div class="card-content">
+                    <h2>Fullmetal Alchemist</h2>
+                    <p class="card-desc">Equivalent Exchange! Test je kennis over de Elric broers en krachtige alchemie.</p>
+                    <span class="card-counter">10 Vragen</span>
+                    <button class="card-btn" onclick="startQuiz('fma')">Speel Nu</button>
+                </div>
+            </div>
+
+            <div class="quiz-card bg-6">
+                <div class="card-content">
+                    <h2>Fairy Tail</h2>
+                    <p class="card-desc">Vuur, ijs en pure vriendschap. Weet jij alles over de sterkste gilde in Fiore?</p>
+                    <span class="card-counter">10 Vragen</span>
+                    <button class="card-btn" onclick="startQuiz('fairy-tail')">Speel Nu</button>
                 </div>
             </div>
         </div>

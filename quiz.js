@@ -47,6 +47,30 @@ const quizDatabase = {
         { q: "Which animated Disney movie features a character named Simba?", a: ["Aladdin", "Mulan", "The Lion King", "Tarzan"], correct: 2 },
         { q: "In the television show 'Breaking Bad', what is Walter White's alias?", a: ["Heisenberg", "Scarface", "The Joker", "Batman"], correct: 0 },
         { q: "What is the name of the magical land in 'The Lord of the Rings'?", a: ["Narnia", "Westeros", "Middle-earth", "Hogwarts"], correct: 2 }
+    ],
+    'fma': [
+        { q: "Wat is de fundamentele wet van alchemie?", a: ["Oneindige Kracht", "Gelijkwaardige Ruil", "Magische Oorsprong", "Absolute Transmutatie"], correct: 1 },
+        { q: "Aan welk object is de ziel van Alphonse Elric gebonden?", a: ["Een zwaard", "Een steen", "Een harnas", "Een automail-arm"], correct: 2 },
+        { q: "Wie staat in het leger bekend als de Flame Alchemist?", a: ["Maes Hughes", "Roy Mustang", "Jean Havoc", "Scar"], correct: 1 },
+        { q: "Waar zijn de Homunculi naar vernoemd?", a: ["De 7 Hoofdzonden", "Planeten", "Elementen", "Griekse Goden"], correct: 0 },
+        { q: "Wat is het beroep van Winry Rockbell?", a: ["Staatsalchemist", "Dokter", "Automail-monteur", "Militair"], correct: 2 },
+        { q: "Welke officiële titel draagt Edward Elric?", a: ["Fullmetal Alchemist", "Strong Arm Alchemist", "Iron Alchemist", "Silver Alchemist"], correct: 0 },
+        { q: "Wat zoeken de broers om hun originele lichamen te herstellen?", a: ["Draak", "Steen der Wijzen", "Chimera", "Fenix"], correct: 1 },
+        { q: "Wie is de gespierde alchemist die altijd zijn spieren laat zien?", a: ["Sig Curtis", "Alex Louis Armstrong", "Barry the Chopper", "King Bradley"], correct: 1 },
+        { q: "Wat voor markering dragen de Homunculi op hun lichaam?", a: ["Een zon", "Een pentagram", "Een Ouroboros (slang)", "Een bloedkruis"], correct: 2 },
+        { q: "Welk dier werd gecombineerd met Nina Tucker?", a: ["Een kat", "Een vogel", "Een hond", "Een aap"], correct: 2 }
+    ],
+    'fairy-tail': [
+        { q: "Wie is de vuur Dragon Slayer van Fairy Tail?", a: ["Gray", "Gajeel", "Natsu", "Laxus"], correct: 2 },
+        { q: "Wat voor wezen is Happy?", a: ["Een hond", "Een Exceed (magische kat)", "Een demon", "Een draak"], correct: 1 },
+        { q: "Welk type magie gebruikt Lucy Heartfilia?", a: ["Ice-Make", "Celestial Spirit Magic", "Requip", "Water Magic"], correct: 1 },
+        { q: "Wat is de beruchte alias van Erza Scarlet?", a: ["Salamander", "Titania", "Demon", "Fairy Queen"], correct: 1 },
+        { q: "Wie was de eerste gilde-meester en oprichter van Fairy Tail?", a: ["Makarov Dreyar", "Zeref", "Mavis Vermillion", "Gildarts Clive"], correct: 2 },
+        { q: "Welke beruchte duistere tovenaar creëerde de demonen?", a: ["Hades", "Acnologia", "Zeref", "Jellal"], correct: 2 },
+        { q: "Hoe heet de vuurdraak die Natsu heeft opgevoed?", a: ["Igneel", "Metalicana", "Grandeeney", "Acnologia"], correct: 0 },
+        { q: "Wat is de rivaliteit tussen Natsu en Gray voornamelijk op gebaseerd?", a: ["Dezelfde liefde", "Vuur vs. IJs magie", "De gilde-meester titel", "Ze zijn stiekem broers"], correct: 1 },
+        { q: "Welke gilde (met Gajeel en Juvia) was vroeger een vijand maar werd later bondgenoot?", a: ["Sabertooth", "Phantom Lord", "Blue Pegasus", "Lamia Scale"], correct: 1 },
+        { q: "Wat gebeurt er altijd als Natsu in een voertuig stapt?", a: ["Hij wordt sterker", "Hij valt in slaap", "Hij wordt extreem wagenziek", "Zijn vuur dooft direct"], correct: 2 }
     ]
 };
 
