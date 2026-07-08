@@ -1,5 +1,5 @@
 /* ==========================================================================
-   1. BASIS & LUFFY ACHTERGROND (Gecorrigeerd)
+   1. BASIS & LUFFY ACHTERGROND (Grijze Editie)
    ========================================================================== */
 * {
     box-sizing: border-box;
@@ -9,7 +9,7 @@
 
 body {
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-    color: #111827; /* Donkergrijs/zwart voor optimale leesbaarheid */
+    color: #0f172a; 
     min-height: 100vh;
     display: flex;
     justify-content: center;
@@ -17,84 +17,144 @@ body {
     padding: 40px 20px;
     line-height: 1.5;
 
-    /* --- DE NIEUWE GRIJZE BASISKLEUR --- */
-    background-color: #d1d5db; /* Een mooie, rustige zilvergrijze kleur */
-    position: relative; /* Nodig om het Luffy patroon er netjes overheen te leggen */
+    /* Rustige, strakke zilvergrijze achtergrond */
+    background-color: #d1d5db; 
+    position: relative; 
 }
 
-/* --- HET LUFFY STROHOED PATROON (Werkt gegarandeerd) --- */
-/* --- HET LUFFY STROHOED PATROON (Gecorrigeerd) --- */
-/* --- HET LUFFY STROHOED PATROON --- */
+/* Het Luffy Watermerk Patroon */
 body::before {
     content: "";
     position: fixed; 
-    
-    /* Maak de laag groter zodat we schuin kunnen draaien zonder lege hoeken */
     top: -50%;
     left: -50%;
     width: 200vw;
     height: 200vh;
-    
-    /* Hier roepen we jouw opgeslagen plaatje op! */
-    background-image: url('hat.png');
-    
-    /* Grootte en verspreiding */
-    background-size: 160px 160px; /* Maakt jouw plaatje mooi groot */
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='0.9em' font-size='70'%3E👒%3C/text%3E%3C/svg%3E");
+    background-size: 150px 150px; 
     background-repeat: repeat;
-    
-    transform: rotate(-15deg); /* Zet ze schuin */
-    
-    opacity: 0.15; /* Zorgt voor een mooie zichtbaarheid op de grijze achtergrond */
+    transform: rotate(-15deg); 
+    opacity: 0.20; 
     z-index: -1; 
     pointer-events: none; 
 }
+
 /* ==========================================================================
-   2. STARTPAGINA (INDEX)
+   2. STARTPAGINA (Ultra Professioneel Redesign)
    ========================================================================== */
 .welcome-container {
     background: #ffffff;
-    border: 1px solid #e5e7eb;
-    padding: 48px 40px;
-    border-radius: 16px;
+    padding: 50px 40px;
+    border-radius: 24px;
     width: 100%;
-    max-width: 480px;
+    max-width: 500px;
     text-align: center;
-    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.05), 0 4px 6px -2px rgba(0, 0, 0, 0.025);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.08); /* Zachte, zwevende schaduw */
+    position: relative;
+    overflow: hidden;
 }
 
-.welcome-container h1 {
-    font-size: 2.25rem;
-    font-weight: 700;
-    color: #111827;
-    margin-bottom: 16px;
-    letter-spacing: -0.02em;
+/* Dit zorgt voor de professionele kleurlijn bovenaan de witte kaart */
+.welcome-container::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 6px;
+    background: linear-gradient(90deg, #3b82f6, #8b5cf6, #ec4899);
+}
+
+.logo-circle {
+    width: 80px;
+    height: 80px;
+    background: #f8fafc; /* Heel licht grijs-blauw voor de avatar */
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0 auto 24px auto;
+    box-shadow: 0 8px 16px rgba(0,0,0,0.06);
+    border: 2px solid #ffffff;
+    transition: transform 0.3s ease;
+}
+
+.welcome-container:hover .logo-circle {
+    transform: translateY(-5px) scale(1.05); /* Veert op als je over de kaart beweegt */
+}
+
+.logo-emoji {
+    font-size: 40px; /* Mooi formaat in de avatar cirkel */
+}
+
+.welcome-title {
+    font-size: 2rem;
+    font-weight: 800;
+    color: #0f172a;
+    margin-bottom: 12px;
+    letter-spacing: -0.03em;
 }
 
 .welcome-text {
-    color: #4b5563;
-    font-size: 1rem;
-    margin-bottom: 32px;
-}
-
-.start-game-btn {
-    display: block;
-    text-decoration: none;
-    background-color: #0f172a; /* Strak donkerblauw/zwart */
-    color: #ffffff;
+    color: #64748b;
     font-size: 1.05rem;
-    font-weight: 600;
-    padding: 14px 24px;
-    border-radius: 8px;
-    width: 100%;
-    transition: background-color 0.2s ease;
+    line-height: 1.6;
+    margin-bottom: 24px;
 }
 
-.start-game-btn:hover {
-    background-color: #334155;
+/* De stijl voor de kleine categorie 'tags' */
+.badges-container {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-bottom: 32px;
+    flex-wrap: wrap;
+}
+
+.badge {
+    background: #f1f5f9;
+    border: 1px solid #e2e8f0;
+    color: #475569;
+    padding: 6px 14px;
+    border-radius: 20px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    letter-spacing: 0.02em;
+}
+
+.start-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    text-decoration: none;
+    background: #0f172a;
+    color: #ffffff;
+    font-size: 1.1rem;
+    font-weight: 600;
+    padding: 16px 24px;
+    border-radius: 14px;
+    width: 100%;
+    transition: all 0.2s ease;
+}
+
+.start-btn:hover {
+    background: #1e293b;
+    transform: translateY(-2px);
+    box-shadow: 0 10px 20px rgba(15, 23, 42, 0.15);
+}
+
+/* Animatie voor de SVG-pijl in de knop */
+.arrow-icon {
+    transition: transform 0.2s ease;
+}
+
+.start-btn:hover .arrow-icon {
+    transform: translateX(5px); /* Schuift de pijl naar rechts op hover */
 }
 
 /* ==========================================================================
-   3. QUIZ SELECTIESCHERM (De Kaarten)
+   3. QUIZ SELECTIESCHERM & KAARTEN (Blijft Ongewijzigd)
    ========================================================================== */
 .home-wrapper {
     width: 100%;
@@ -104,23 +164,23 @@ body::before {
 
 .main-title {
     font-size: 2.5rem;
-    font-weight: 700;
+    font-weight: 800;
     margin-bottom: 40px;
-    color: #111827;
+    color: #0f172a;
     letter-spacing: -0.02em;
 }
 
 .card-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 33px;
+    gap: 24px;
     width: 100%;
 }
 
 .quiz-card {
     background-color: #ffffff;
     border: 1px solid #e5e7eb;
-    border-radius: 12px;
+    border-radius: 20px;
     height: 400px; 
     position: relative;
     overflow: hidden;
@@ -132,11 +192,10 @@ body::before {
 
 .quiz-card:hover {
     transform: translateY(-4px);
-    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 15px 25px -3px rgba(0, 0, 0, 0.1);
 }
 
 .card-content {
-    /* Donkere fade aan de onderkant zodat witte tekst leesbaar is */
     background: linear-gradient(to top, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0.4) 50%, rgba(0,0,0,0.1) 100%);
     width: 100%;
     height: 100%;
@@ -175,10 +234,10 @@ body::before {
     background-color: #ffffff;
     color: #111827;
     border: none;
-    border-radius: 6px;
-    padding: 10px 20px;
+    border-radius: 8px;
+    padding: 12px 20px;
     font-size: 0.95rem;
-    font-weight: 600;
+    font-weight: 700;
     cursor: pointer;
     width: 100%;
     transition: background-color 0.2s;
@@ -201,10 +260,10 @@ body::before {
     background: #ffffff;
     border: 1px solid #e5e7eb;
     padding: 40px;
-    border-radius: 16px;
+    border-radius: 24px;
     width: 100%;
     max-width: 600px;
-    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.05);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.08);
 }
 
 .hidden { display: none !important; }
@@ -212,19 +271,20 @@ body::before {
 .quiz-header {
     display: flex;
     justify-content: space-between;
-    font-size: 0.9rem;
-    color: #6b7280;
-    font-weight: 600;
+    font-size: 0.95rem;
+    color: #64748b;
+    font-weight: 700;
     margin-bottom: 24px;
     padding-bottom: 16px;
-    border-bottom: 1px solid #f3f4f6;
+    border-bottom: 2px solid #f1f5f9;
 }
 
 #quiz-screen h2 {
-    font-size: 1.25rem;
-    font-weight: 600;
-    color: #111827;
+    font-size: 1.35rem;
+    font-weight: 700;
+    color: #0f172a;
     margin-bottom: 24px;
+    line-height: 1.4;
 }
 
 .options-grid {
@@ -235,13 +295,13 @@ body::before {
 
 .option-btn {
     background-color: #ffffff;
-    color: #374151;
-    border: 1px solid #d1d5db;
-    border-radius: 8px;
+    color: #334155;
+    border: 2px solid #e2e8f0;
+    border-radius: 12px;
     padding: 16px 20px;
     text-align: left;
-    font-size: 1rem;
-    font-weight: 500;
+    font-size: 1.05rem;
+    font-weight: 600;
     cursor: pointer;
     transition: all 0.2s ease;
 }
@@ -250,22 +310,24 @@ body::before {
     border-color: #0f172a;
     background-color: #f8fafc;
     color: #0f172a;
+    transform: translateX(4px);
 }
 
 .restart-btn {
     background-color: #0f172a;
     color: #ffffff;
     border: none;
-    padding: 14px 24px;
-    border-radius: 8px;
+    padding: 16px 24px;
+    border-radius: 12px;
     cursor: pointer;
-    font-weight: 600;
-    font-size: 1rem;
+    font-weight: 700;
+    font-size: 1.1rem;
     margin-top: 24px;
     width: 100%;
-    transition: background-color 0.2s;
+    transition: all 0.2s ease;
 }
 
 .restart-btn:hover {
-    background-color: #334155;
+    background-color: #1e293b;
+    transform: translateY(-2px);
 }
