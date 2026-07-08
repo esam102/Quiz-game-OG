@@ -65,6 +65,33 @@
         <button onclick="resetGame()" class="restart-btn">Play Again</button>
     </div>
 
+    <audio id="bg-music" loop>
+            <source src="music.mp3" type="audio/mpeg">
+        </audio>
+
+        <button id="music-btn" class="music-toggle" onclick="toggleMusic()">
+            🔇 Muziek Uit
+        </button>
+
+        <script>
+            const music = document.getElementById("bg-music");
+            const musicBtn = document.getElementById("music-btn");
+            let isPlaying = false;
+
+            function toggleMusic() {
+                if (isPlaying) {
+                    music.pause();
+                    musicBtn.innerHTML = "🔇 Muziek Uit";
+                } else {
+                    music.play();
+                    musicBtn.innerHTML = "🔊 Muziek Aan";
+                }
+                isPlaying = !isPlaying;
+            }
+        </script>
+    </div> </body>
+</html>
+
     <script src="quiz.js"></script>
 </body>
 </html>
