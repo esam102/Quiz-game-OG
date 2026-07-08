@@ -1,97 +1,105 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="nl">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Choose Your Quiz</title>
+    <title>Kies Je Quiz</title>
     <link rel="stylesheet" href="main.css">
 </head>
 <body>
 
     <div id="selector-screen" class="home-wrapper">
-        <h1 class="main-title">Home page</h1>
+        <h1 class="main-title">Kies je Categorie</h1>
         
         <div class="card-grid">
             <div class="quiz-card bg-1">
                 <div class="card-content">
-                    <h2>Keuze 1</h2>
-                    <p class="card-desc">Test je kennis over Monkey D. Luffy en zijn legendarische Straw Hat crew in de wereld van One Piece!</p>
-                    <span class="card-counter">aantal 0/10</span>
-                    <button class="card-btn" onclick="startQuiz('one-piece')">Start</button>
+                    <h2>One Piece</h2>
+                    <p class="card-desc">Test je kennis over Monkey D. Luffy en zijn legendarische Straw Hat crew!</p>
+                    <span class="card-counter">10 Vragen</span>
+                    <button class="card-btn" onclick="startQuiz('one-piece')">Speel Nu</button>
                 </div>
             </div>
 
             <div class="quiz-card bg-2">
                 <div class="card-content">
-                    <h2>Keuze 2</h2>
-                    <p class="card-desc">Van Dragon Ball tot Naruto en Attack on Titan. Ben jij een echte all-round anime expert?</p>
-                    <span class="card-counter">aantal 0/10</span>
-                    <button class="card-btn" onclick="startQuiz('anime-general')">Start</button>
+                    <h2>Anime General</h2>
+                    <p class="card-desc">Van Dragon Ball tot Naruto en Attack on Titan. Ben jij een anime expert?</p>
+                    <span class="card-counter">10 Vragen</span>
+                    <button class="card-btn" onclick="startQuiz('anime-general')">Speel Nu</button>
                 </div>
             </div>
 
             <div class="quiz-card bg-3">
                 <div class="card-content">
-                    <h2>Keuze 3</h2>
-                    <p class="card-desc">Laat zien wat je weet over iconische games zoals Minecraft, Mario, Elden Ring en PlayStation klassiekers.</p>
-                    <span class="card-counter">aantal 0/10</span>
-                    <button class="card-btn" onclick="startQuiz('gaming')">Start</button>
+                    <h2>Gaming Trivia</h2>
+                    <p class="card-desc">Laat zien wat je weet over Minecraft, Mario, Elden Ring en PlayStation.</p>
+                    <span class="card-counter">10 Vragen</span>
+                    <button class="card-btn" onclick="startQuiz('gaming')">Speel Nu</button>
                 </div>
             </div>
 
             <div class="quiz-card bg-4">
                 <div class="card-content">
-                    <h2>Keuze 4</h2>
-                    <p class="card-desc">Herken jij alle blockbusters en hitseries? Test je popcultuur kennis in deze ultieme filmquiz.</p>
-                    <span class="card-counter">aantal 0/10</span>
-                    <button class="card-btn" onclick="startQuiz('movies')">Start</button>
+                    <h2>Movies & Series</h2>
+                    <p class="card-desc">Herken jij alle blockbusters en hitseries? Test je popcultuur kennis.</p>
+                    <span class="card-counter">10 Vragen</span>
+                    <button class="card-btn" onclick="startQuiz('movies')">Speel Nu</button>
                 </div>
             </div>
         </div>
     </div>
 
     <div id="quiz-screen" class="quiz-container hidden">
-        <div class="quiz-header">
-            <span id="progress-text">Question 1 of 10</span>
-            <span id="score-text">Score: 0</span>
+        <div class="quiz-status-bar">
+            <span id="progress-text" class="status-badge">Vraag 1/10</span>
+            <span id="score-text" class="status-badge score-badge">Score: 0</span>
         </div>
-        <h2 id="question-text">Question text?</h2>
-        <div id="options-container" class="options-grid"></div>
+        
+        <h2 id="question-text" class="question-title">Hier komt de vraag?</h2>
+        
+        <div id="options-container" class="options-grid">
+            </div>
     </div>
 
-    <div id="results-screen" class="quiz-container hidden">
-        <h1>Quiz Complete!</h1>
-        <p id="final-score-text">You scored 0 out of 10</p>
-        <button onclick="resetGame()" class="restart-btn">Play Again</button>
+    <div id="results-screen" class="quiz-container hidden text-center">
+        <div class="logo-circle" style="margin: 0 auto 24px auto;">
+            <span class="logo-emoji">🏆</span>
+        </div>
+        <h1 class="welcome-title">Quiz Voltooid!</h1>
+        <p id="final-score-text" class="welcome-text" style="font-size: 1.25rem; font-weight: 600; color: #0f172a;">
+            Je scoorde 0 van de 10
+        </p>
+        
+        <button onclick="resetGame()" class="start-btn" style="margin-top: 20px;">
+            Terug naar Menu
+            <svg class="arrow-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <line x1="19" y1="12" x2="5" y2="12"></line>
+                <polyline points="12 19 5 12 12 5"></polyline>
+            </svg>
+        </button>
     </div>
 
     <audio id="bg-music" loop>
-            <source src="music.mp3" type="audio/mpeg">
-        </audio>
-
-        <button id="music-btn" class="music-toggle" onclick="toggleMusic()">
-            🔇 Muziek Uit
-        </button>
-
-        <script>
-            const music = document.getElementById("bg-music");
-            const musicBtn = document.getElementById("music-btn");
-            let isPlaying = false;
-
-            function toggleMusic() {
-                if (isPlaying) {
-                    music.pause();
-                    musicBtn.innerHTML = "🔇 Muziek Uit";
-                } else {
-                    music.play();
-                    musicBtn.innerHTML = "🔊 Muziek Aan";
-                }
-                isPlaying = !isPlaying;
-            }
-        </script>
-    </div> </body>
-</html>
+        <source src="music.mp3" type="audio/mpeg">
+    </audio>
+    <button id="music-btn" class="music-toggle" onclick="toggleMusic()">🔇 Muziek Uit</button>
 
     <script src="quiz.js"></script>
+    <script>
+        const music = document.getElementById("bg-music");
+        const musicBtn = document.getElementById("music-btn");
+        let isPlaying = false;
+        function toggleMusic() {
+            if (isPlaying) {
+                music.pause();
+                musicBtn.innerHTML = "🔇 Muziek Uit";
+            } else {
+                music.play();
+                musicBtn.innerHTML = "🔊 Muziek Aan";
+            }
+            isPlaying = !isPlaying;
+        }
+    </script>
 </body>
 </html>
