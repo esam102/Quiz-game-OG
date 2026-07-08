@@ -35,6 +35,18 @@ const quizDatabase = {
         { q: "What underwater dystopian city serves as the setting for BioShock?", a: ["Rapture", "Columbia", "Gotham", "Tamriel"], correct: 0 },
         { q: "Which sci-fi military shooter stars the Master Chief?", a: ["Doom", "Halo", "Gears of War", "Destiny"], correct: 1 },
         { q: "What year did the original PlayStation console launch in Japan?", a: ["1990", "1994", "1998", "2000"], correct: 1 }
+    ],
+    'movies': [
+        { q: "Which movie features the famous line 'I am your father'?", a: ["Star Trek", "The Empire Strikes Back", "The Matrix", "Lord of the Rings"], correct: 1 },
+        { q: "What is the highest-grossing film of all time (as of 2024)?", a: ["Avatar", "Avengers: Endgame", "Titanic", "Star Wars: The Force Awakens"], correct: 0 },
+        { q: "In the Harry Potter series, what is the name of the wizard prison?", a: ["Azkaban", "Hogwarts", "Gringotts", "Durmstrang"], correct: 0 },
+        { q: "Which actor plays Iron Man in the Marvel Cinematic Universe?", a: ["Chris Evans", "Chris Hemsworth", "Robert Downey Jr.", "Mark Ruffalo"], correct: 2 },
+        { q: "What is the name of the fictional continent where Game of Thrones primarily takes place?", a: ["Middle-earth", "Narnia", "Westeros", "Pandora"], correct: 2 },
+        { q: "In The Matrix, what color pill does Neo take?", a: ["Blue", "Red", "Green", "Yellow"], correct: 1 },
+        { q: "Who directed the mind-bending movie 'Inception'?", a: ["Steven Spielberg", "Quentin Tarantino", "Martin Scorsese", "Christopher Nolan"], correct: 3 },
+        { q: "Which animated Disney movie features a character named Simba?", a: ["Aladdin", "Mulan", "The Lion King", "Tarzan"], correct: 2 },
+        { q: "In the television show 'Breaking Bad', what is Walter White's alias?", a: ["Heisenberg", "Scarface", "The Joker", "Batman"], correct: 0 },
+        { q: "What is the name of the magical land in 'The Lord of the Rings'?", a: ["Narnia", "Westeros", "Middle-earth", "Hogwarts"], correct: 2 }
     ]
 };
 
@@ -61,7 +73,7 @@ function loadQuestion() {
     const currentQuestion = activeQuestions[currentQuestionIndex];
     
     // Update Header Status
-    document.getElementById('progress-text').innerText = `Question ${currentQuestionIndex + 1} of 10`;
+    document.getElementById('progress-text').innerText = `Vraag ${currentQuestionIndex + 1} / 10`;
     document.getElementById('score-text').innerText = `Score: ${userScore}`;
     
     // Set Question Title
@@ -102,7 +114,7 @@ function checkAnswer(selectedIndex) {
 function showResults() {
     document.getElementById('quiz-screen').classList.add('hidden');
     document.getElementById('results-screen').classList.remove('hidden');
-    document.getElementById('final-score-text').innerText = `You scored ${userScore} out of 10!`;
+    document.getElementById('final-score-text').innerText = `Je scoorde ${userScore} van de 10`;
 }
 
 // Resets back to home dashboard
